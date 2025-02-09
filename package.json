@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test",
+    "test ui": "npx playwright test --ui"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KseniyaRI/QA.GURU_Repo.git"
@@ -18,5 +21,8 @@
   "devDependencies": {
     "@playwright/test": "^1.50.1",
     "@types/node": "^22.13.1"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.4.0"
   }
 }
