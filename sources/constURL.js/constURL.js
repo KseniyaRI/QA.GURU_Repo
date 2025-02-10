@@ -1,0 +1,1 @@
+export const URL_UI = 'https://realworld.qa.guru/'; //тестовый стенд
