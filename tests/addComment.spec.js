@@ -36,14 +36,15 @@ test.describe('Регистрация пользователя перед пуб
   }); 
 
   test('Добавление комментария к созданной статье', async ({page}) => {
-      const createArticlePage = new CreateArticlePage(page, article.articleTitle);
+      const createArticlePage = new CreateArticlePage(page, article.articleTitle, article.articleBody);
       await createArticlePage.gotoCreateArticle();
       await createArticlePage.createArticle(article.articleTitle, article.articleDescription, article.articleBody);
       
-      const articlePage = new ArticlePage(page, article.articleTitle);
+      const articlePage = new ArticlePage(page, article.articleTitle, article.articleBody);
       
       await articlePage.addArticleComment(comment.commentBody);
       
-      await expect(page.getByText(comment.commentBody)).toBeVisible();   
-    });
+  // одна команда для проверки всех элементов, указанных в articlePage.js
+      await articlePage.verifyAllElementsArticlePage();
   });
+});

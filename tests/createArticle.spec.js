@@ -33,11 +33,12 @@ test.describe('Регистрация пользователя перед пуб
 
   test('Пользователь может создать статью с уникальным заголовком', async ({page}) => {
     const yourFeedPage = new YourFeedPage(page, user.username);
-    const createArticlePage = new CreateArticlePage(page, article.articleTitle);
-    const articlePage = new ArticlePage(page, article.articleTitle);
+    const createArticlePage = new CreateArticlePage(page);
+    const articlePage = new ArticlePage(page, article.articleTitle, article.articleBody);
     
     await createArticlePage.createArticle(article.articleTitle, article.articleDescription, article.articleBody);
     
-    await expect(page.getByRole('heading')).toContainText(article.articleTitle);
+    // одна команда для проверки всех элементов, указанных в articlePage.js
+    await articlePage.verifyAllElementsArticlePage();
   });
 });

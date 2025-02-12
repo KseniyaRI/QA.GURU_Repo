@@ -38,6 +38,7 @@ test('Пользователь может залогиниться в систе
     await loginPage.login(user.email, newPassword.valuePassword);
 
     const yourFeedPage = new YourFeedPage(page, user.username);
-    await expect(yourFeedPage.yourFeedButton).toBeVisible();
+      // одна команда для проверки всех элементов, указанных в yourFeedPage.js
+    await yourFeedPage.verifyAllElementsYourFeedPage();
     });
 });

@@ -5,13 +5,14 @@ import { RegisterPage } from '../../sources/pages/registerPage.js';
 import { YourFeedPage } from '../../sources/pages/yourFeedPage.js';
 import { URL_UI } from '../../sources/constURL/constURL.js';
 
-test('Пользователь может авторизоваться с указанием уникального логина и пароля', async ({page}) => {
-  const user = {
-    username: faker.person.firstName(),
-    email: faker.internet.email(),
-    password: faker.internet.password({ length: 10 })
-  };
+//создание пользователя
+const user = {
+  username: faker.person.firstName(),
+  email: faker.internet.email(),
+  password: faker.internet.password({ length: 10 })
+};
 
+test('Пользователь может авторизоваться с указанием уникального логина и пароля', async ({page}) => {
   const mainPage = new MainPage(page);
   const registerPage = new RegisterPage(page);
   const yourFeedPage = new YourFeedPage(page, user.username);
@@ -20,5 +21,6 @@ test('Пользователь может авторизоваться с ука
   await mainPage.gotoRegister(); 
   await registerPage.register(user.username, user.email, user.password);
 
-  await expect(yourFeedPage.profileNameFeild).toBeVisible();
+  // одна команда для проверки всех элементов, указанных в yourFeedPage.js
+  await yourFeedPage.verifyAllElementsYourFeedPage();
 });
