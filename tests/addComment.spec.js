@@ -1,27 +1,49 @@
 import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import { RegisterPage } from '../sources/pages/registerPage';
-import { CreateArticlePage } from '../sources/pages/createArticlePage';
-import { AddCommentPage } from '../sources/pages/addCommentPage';
-import { URL_UI } from '../sources/constURL';
+import { MainPage } from '../sources/pages/mainPage.js';
+import { RegisterPage } from '../sources/pages/registerPage.js';
+import { CreateArticlePage } from '../sources/pages/createArticlePage.js';
+import { ArticlePage } from '../sources/pages/articlePage.js';
+import {URL_UI} from '../sources/constURL/constURL.js';
 
-test.describe('Регистрация пользователя и создание им статьи', () => {
-    test.beforeEach(async ({page}) => {
-        const mainPage = new MainPage(page);
-        const registerPage = new RegisterPage(page);
-        const yourFeedPage = new YourFeedPage(page, username);
+// создание пользователя
+const user = {
+  username: faker.person.firstName(),
+  email: faker.internet.email(),
+  password: faker.internet.password({ length: 10 })
+};
 
-        await mainPage.open(URL_UI);
-        await mainPage.gotoRegister();
-        await registerPage.register(username, email, password);
+// создание статьи
+const article = {
+  articleTitle: faker.string.alpha(10),
+  articleDescription: faker.lorem.sentence(1),
+  articleBody: faker.lorem.paragraphs(5)
+};
 
-        await createArticlePage.addComment(createArticlePage.articleBody).toBeVisible();
-        await expect(createArticlePage.articleBody).toContainText(articleBody);
+ //  создание коментария к статье
+ const comment = {
+  commentBody: faker.lorem.sentence(3),
+};
+
+test.describe('Регистрация пользователя перед публикацией статьи', () => {
+  test.beforeEach(async ({ page }) => {
+      const mainPage = new MainPage(page);
+      const registerPage = new RegisterPage(page);
+      
+      await mainPage.open(URL_UI);
+      await mainPage.gotoRegister();
+      await registerPage.register(user.username, user.email, user.password);
+  }); 
+
+  test('Добавление комментария к созданной статье', async ({page}) => {
+      const createArticlePage = new CreateArticlePage(page, article.articleTitle);
+      await createArticlePage.gotoCreateArticle();
+      await createArticlePage.createArticle(article.articleTitle, article.articleDescription, article.articleBody);
+      
+      const articlePage = new ArticlePage(page, article.articleTitle);
+      
+      await articlePage.addArticleComment(comment.commentBody);
+      
+      await expect(page.getByText(comment.commentBody)).toBeVisible();   
     });
-    
-    test('Добавление комментария к созданной статье', async ({page}) => {
-    const addCommentPage = new AddCommentPage(page, articleBody);
-    
-    
-});
-});
+  });
