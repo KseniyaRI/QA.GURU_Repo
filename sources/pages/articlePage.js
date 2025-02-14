@@ -20,15 +20,5 @@ export class ArticlePage {
         await this.articleCommentField.click();
         await this.articleCommentField.fill(articleComment);
         await this.postCommentButton.click();
-};
-
-   // прячем проверку всех элементов (если хотя бы один не пройдет – упадет ошибка)
-    async verifyAllElementsArticlePage() {
-        await Promise.all([
-            expect(this.articleTitleField).toBeVisible(),
-            expect(this.articleBodyField).toBeVisible(),
-            expect(this.articleCommentField).toBeVisible(),
-            expect(this.postCommentButton).toBeVisible()
-        ]);
-};
+    };
 };

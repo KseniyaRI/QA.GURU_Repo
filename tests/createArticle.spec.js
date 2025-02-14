@@ -38,7 +38,9 @@ test.describe('Регистрация пользователя перед пуб
     
     await createArticlePage.createArticle(article.articleTitle, article.articleDescription, article.articleBody);
     
-    // одна команда для проверки всех элементов, указанных в articlePage.js
-    await articlePage.verifyAllElementsArticlePage();
+    await expect(articlePage.articleTitleField).toBeVisible(),
+    await expect(articlePage.articleBodyField).toBeVisible(),
+    await expect(articlePage.articleCommentField).toBeVisible(),
+    await expect(articlePage.postCommentButton).toBeVisible()
   });
 });

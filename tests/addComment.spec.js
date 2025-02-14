@@ -43,8 +43,10 @@ test.describe('Регистрация пользователя перед пуб
       const articlePage = new ArticlePage(page, article.articleTitle, article.articleBody);
       
       await articlePage.addArticleComment(comment.commentBody);
-      
-  // одна команда для проверки всех элементов, указанных в articlePage.js
-      await articlePage.verifyAllElementsArticlePage();
+
+      await expect(articlePage.articleTitleField).toBeVisible(),
+      await expect(articlePage.articleBodyField).toBeVisible(),
+      await expect(articlePage.articleCommentField).toBeVisible(),
+      await expect(articlePage.postCommentButton).toBeVisible()
   });
 });

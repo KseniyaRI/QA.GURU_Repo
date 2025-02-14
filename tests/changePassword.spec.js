@@ -2,6 +2,8 @@ import { test, expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import { MainPage } from '../sources/pages/mainPage.js';
 import { RegisterPage } from '../sources/pages/registerPage.js';
+import { YourFeedPage } from '../sources/pages/yourFeedPage.js';
+import { LoginPage } from '../sources/pages/loginPage.js';
 import { SettingsPage } from '../sources/pages/settingsPage.js';
 import {URL_UI} from '../sources/constURL/constURL.js';
 
@@ -33,5 +35,16 @@ test.describe('Регистрация пользователя перед пуб
 
     await expect(page.getByPlaceholder('Password')).not.toHaveValue('');
     await expect(settingsPage.updateSettingsButton).not.toBeVisible();
+
+    await settingsPage.logout();
+
+    const loginPage = new LoginPage(page);
+    await loginPage.login(user.email, newPassword.valuePassword);
+  
+    const yourFeedPage = new YourFeedPage(page, user.username);
+    await expect(yourFeedPage.profileNameField).toBeVisible(),
+    await expect(yourFeedPage.yourFeedButton).toBeVisible(),
+    await expect(yourFeedPage.newArticleButton).toBeVisible(),
+    await expect(yourFeedPage.homeButton).toBeVisible()
   });
 });
