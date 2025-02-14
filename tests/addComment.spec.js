@@ -40,12 +40,13 @@ test.describe('Регистрация пользователя перед пуб
       await createArticlePage.gotoCreateArticle();
       await createArticlePage.createArticle(article.articleTitle, article.articleDescription, article.articleBody);
       
-      const articlePage = new ArticlePage(page, article.articleTitle, article.articleBody);
+      const articlePage = new ArticlePage(page, article.articleTitle, article.articleBody, comment.commentBody);
       
       await articlePage.addArticleComment(comment.commentBody);
 
       await expect(articlePage.articleTitleField).toBeVisible(),
       await expect(articlePage.articleBodyField).toBeVisible(),
+      await expect(articlePage.commentBodyField).toBeVisible(),
       await expect(articlePage.articleCommentField).toBeVisible(),
       await expect(articlePage.postCommentButton).toBeVisible()
   });
