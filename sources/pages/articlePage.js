@@ -3,21 +3,21 @@
 
 export class ArticlePage {
     constructor(page, articleTitle, articleBody, commentBody) {
-        this.page = page;
-        this.articleTitleField = page.getByText(articleTitle);
-        this.articleBodyField = page.getByText(articleBody);
-        this.commentBodyField = page.getByText(commentBody);
-        this.articleCommentField = page.getByPlaceholder('Write a comment...');
-        this.postCommentButton = page.getByRole('button', { name: 'Post Comment' });
-    };
+        this.page = page
+        this.articleTitle = page.getByText(articleTitle)
+        this.articleBody = page.getByText(articleBody)
+        this.commentBodyField = page.getByText(commentBody)
+        this.articleCommentField = page.getByPlaceholder('Write a comment...')
+        this.postCommentButton = page.getByRole('button', { name: 'Post Comment' })
+    }
 
     async gotoAddArticleComment() {
         await this.articleCommentField.click();
-    };
+    }
     
     async addArticleComment(commentBody) {
-        await this.articleCommentField.click();
-        await this.articleCommentField.fill(commentBody);
-        await this.postCommentButton.click();
-    };
+        await this.articleCommentField.click()
+        await this.articleCommentField.fill(commentBody)
+        await this.postCommentButton.click()
+    }
 };

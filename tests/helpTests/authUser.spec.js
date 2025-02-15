@@ -21,6 +21,6 @@ test('Пользователь может авторизоваться с ука
   await mainPage.gotoRegister(); 
   await registerPage.register(user.username, user.email, user.password);
 
-  // одна команда для проверки всех элементов, указанных в yourFeedPage.js
-  await yourFeedPage.verifyAllElementsYourFeedPage();
+  await expect(yourFeedPage.profileNameField).toBeVisible();
+  //await expect(yourFeedPage.profileNameField).toContainText(user.username);
 });

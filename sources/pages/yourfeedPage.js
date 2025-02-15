@@ -11,14 +11,4 @@ export class YourFeedPage {
         this.newArticleButton = page.getByRole('link', { name: 'New Article' });
         this.homeButton = page.getByRole('link', { name: 'Home' });
     };
-
-    // прячем проверку всех элементов (если хотя бы один не пройдет – упадет ошибка)
-    async verifyAllElementsYourFeedPage() {
-        await Promise.all([
-            expect(this.profileNameFeild).toBeVisible(),
-            expect(this.yourFeedButton).toBeVisible(),
-            expect(this.newArticleButton).toBeVisible(),
-            expect(this.homeButton).toBeVisible()
-        ]);
-    };
 };

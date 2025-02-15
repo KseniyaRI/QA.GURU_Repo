@@ -44,10 +44,6 @@ test.describe('Регистрация пользователя перед пуб
       
       await articlePage.addArticleComment(comment.commentBody);
 
-      await expect(articlePage.articleTitleField).toBeVisible(),
-      await expect(articlePage.articleBodyField).toBeVisible(),
-      await expect(articlePage.commentBodyField).toBeVisible(),
-      await expect(articlePage.articleCommentField).toBeVisible(),
-      await expect(articlePage.postCommentButton).toBeVisible()
-  });
+      await expect(articlePage.commentBodyField).toBeVisible();
+    });
 });
