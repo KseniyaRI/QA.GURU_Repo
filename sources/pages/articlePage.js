@@ -1,12 +1,9 @@
-//если статья успешно создалась, значит articleTitle – уникальный
-//используем уникальный articleTitle и помним, что поля на странице могут быть изменены/удалены
-
 export class ArticlePage {
-    constructor(page, articleTitle, articleBody, commentBody) {
+    constructor(page, title, body, commentText) {
         this.page = page
-        this.articleTitle = page.getByText(articleTitle)
-        this.articleBody = page.getByText(articleBody)
-        this.commentBodyField = page.getByText(commentBody)
+        this.publishArticleTitle = page.getByText(title)
+        this.publishArticleBody = page.getByText(body)
+        this.commentTextField = page.locator("//div[@class = 'card']");
         this.articleCommentField = page.getByPlaceholder('Write a comment...')
         this.postCommentButton = page.getByRole('button', { name: 'Post Comment' })
     }
@@ -15,9 +12,9 @@ export class ArticlePage {
         await this.articleCommentField.click();
     }
     
-    async addArticleComment(commentBody) {
+    async addArticleComment(text) {
         await this.articleCommentField.click()
-        await this.articleCommentField.fill(commentBody)
+        await this.articleCommentField.fill(text)
         await this.postCommentButton.click()
     }
 };

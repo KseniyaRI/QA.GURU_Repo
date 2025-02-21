@@ -12,14 +12,14 @@ export class CreateArticlePage {
         await this.newArticleButton.click();
     };
     
-    async createArticle(articleTitle, articleDescription, articleBody) {
+    async createArticle(title, description, body) {
         await this.gotoCreateArticle();
         await this.articleTitleField.click();
-        await this.articleTitleField.fill(articleTitle);
+        await this.articleTitleField.fill(title);
         await this.articleDescriptionField.click();
-        await this.articleDescriptionField.fill(articleDescription);
+        await this.articleDescriptionField.fill(description);
         await this.articleBodyField.click();
-        await this.articleBodyField.fill(articleBody);
+        await this.articleBodyField.fill(body);
         await this.publishArticleButton.click();
     };
 };

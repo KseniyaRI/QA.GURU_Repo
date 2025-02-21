@@ -20,11 +20,11 @@ export class SettingsPage {
       await this.logoutButton.click();
   };
 
-    async updatePassword(valuePassword) {
+    async updatePassword(value) {
     await this.gotoOpenDropDownMenu();
     await this.gotoUpdatePasswordSetting();
     await this.newPasswordField.click();
-    await this.newPasswordField.fill(valuePassword);
+    await this.newPasswordField.fill(value);
     await this.updateSettingsButton.click();
   };
 

@@ -1,8 +1,3 @@
-import { expect } from '@playwright/test';
-
-//если пользователь успешно создан, значит username – уникальный
-//используем уникальный username и помним, что поля на странице могут быть изменены/удалены
-
 export class YourFeedPage {
     constructor(page, username) {
         this.page = page;
